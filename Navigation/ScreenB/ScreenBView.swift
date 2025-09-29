@@ -6,17 +6,18 @@
 //
 import SwiftUI
 
-struct ScreenB: View {
+struct ScreenBView: View {
     @Environment(Router.self) private var router
+    @StateObject var viewModel: ScreenBViewModel
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Screen B")
+            Text("Screen B" + " \(viewModel.message)")
                 .font(.largeTitle)
                 .fontWeight(.bold)
             
             Button("Go to Screen C") {
-                router.push(AppRoute.screenC)
+                router.push(to: .screenC(.init(message:"Hello from B")))
             }
             .buttonStyle(.borderedProminent)
         }

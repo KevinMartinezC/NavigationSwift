@@ -12,19 +12,10 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack(path: $router.path) {
-            ScreenA()
-            .navigationDestination(for: AppRoute.self) { screen in
-                switch screen {
-                case .screenB:
-                    ScreenB()
-                case .screenC:
-                    ScreenC()
-                case .screenD:
-                    ScreenD()
-                case .screenE:
-                    ScreenE()
+            ScreenAView()
+                .navigationDestination(for: AppRoute.self) { screen in
+                    navGrap(for: screen)
                 }
-            }
         }
         .environment( router)
     }

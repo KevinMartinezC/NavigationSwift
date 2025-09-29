@@ -10,18 +10,17 @@ import SwiftUI
 @Observable
 final class Router {
     var path = NavigationPath()
-    var inputValueFromScreenE: String = ""
     
-    func push(_ route: AppRoute) {
+    func push(to route: AppRoute) {
         path.append(route)
+    }
+    
+    func pop() {
+        guard !path.isEmpty else { return }
+        path.removeLast()
     }
     
     func popToRoot() {
         path.removeLast(path.count)
-    }
-    
-    func saveAndReturn(data: String) {
-        inputValueFromScreenE = data
-        popToRoot()
     }
 }

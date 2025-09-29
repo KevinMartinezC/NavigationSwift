@@ -1,23 +1,23 @@
 //
-//  ScreenC.swift
+//  ScreenD.swift
 //  Navigation
 //
 //  Created by KevinMartinez on 9/29/25.
 //
-
 import SwiftUI
 
-struct ScreenC: View {
+struct ScreenDView: View {
     @Environment(Router.self) private var router
+    @StateObject var viewModel: ScreenDViewModel
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("Screen C")
+            Text("Screen D")
                 .font(.largeTitle)
                 .fontWeight(.bold)
             
-            Button("Go to Screen D") {
-                router.push(AppRoute.screenD)
+            Button("Go to Screen E") {
+                router.push(to: .screenE(.init(message: "Hello from D")))
             }
             .buttonStyle(.borderedProminent)
         }

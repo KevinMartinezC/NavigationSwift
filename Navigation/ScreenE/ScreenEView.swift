@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct ScreenE: View {
+struct ScreenEView: View {
     @Environment(Router.self) private var router
+    @StateObject var viewModel: ScreenEViewModel
     @State private var textInput: String = ""
     
     var body: some View {
@@ -22,8 +23,7 @@ struct ScreenE: View {
                 .padding()
             
             Button("Submit & Return to A") {
-                // Clear the navigation stack to return to root
-                router.saveAndReturn(data: textInput)
+                router.popToRoot()
             }
             .buttonStyle(.borderedProminent)
             .disabled(textInput.isEmpty)
