@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var router = Router()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack(path: $router.path) {
+            ScreenA()
+            .navigationDestination(for: AppRoute.self) { screen in
+                switch screen {
+                case .screenB:
+                    ScreenB()
+                case .screenC:
+                    ScreenC()
+                case .screenD:
+                    ScreenD()
+                case .screenE:
+                    ScreenE()
+                }
+            }
         }
-        .padding()
+        .environment( router)
     }
 }
 
