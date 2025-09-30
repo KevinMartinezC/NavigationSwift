@@ -10,7 +10,7 @@ import SwiftUI
 struct ScreenEView: View {
     @Environment(Router.self) private var router
     @StateObject var viewModel: ScreenEViewModel
-    @State private var textInput: String = ""
+    let completion: (String) -> Void
     
     var body: some View {
         VStack(spacing: 20) {
@@ -18,15 +18,20 @@ struct ScreenEView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
             
-            TextField("Enter value", text: $textInput)
+            TextField("Enter value", text: $viewModel.message)
                 .textFieldStyle(.roundedBorder)
                 .padding()
             
-            Button("Submit & Return to A") {
-                router.popToRoot()
-            }
-            .buttonStyle(.borderedProminent)
-            .disabled(textInput.isEmpty)
+            HStack {
+                Button("Back") {
+                    router.pop()
+                    completion(viewModel.message)
+                }
+                
+                Button("Submit & Return to A") {
+                    router.popToRoot()
+                }.disabled(viewModel.message.isEmpty)
+            }.buttonStyle(.borderedProminent)
         }
         .padding()
     }

@@ -11,7 +11,7 @@ import Combine
 
 final class ScreenEViewModel: ObservableObject {
     
-    let message: String
+    @Published var message: String
     
     init (
         message: String

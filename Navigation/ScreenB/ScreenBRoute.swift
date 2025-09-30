@@ -7,6 +7,8 @@
 
 import Foundation
 
-struct ScreenBRoute: Hashable {
+struct ScreenBRoute: RouterDestination {
+    let id = UUID()
     let message: String
+    let onComplete: (String) -> Void
 }

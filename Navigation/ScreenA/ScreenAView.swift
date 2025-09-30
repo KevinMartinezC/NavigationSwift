@@ -10,7 +10,7 @@ import SwiftUI
 struct ScreenAView: View {
     @Environment(Router.self) private var router
     @State private var textInput: String = ""
-
+    
     var body: some View {
         VStack(spacing: 20) {
             Text("Screen A")
@@ -19,16 +19,17 @@ struct ScreenAView: View {
             
             TextFielView(text: $textInput)
             
-            HStack
-            {
-                Button("Back") {
-                    
-                }
+            HStack{
+                
                 Button("Go to Screen B") {
-                    router.push(to: .screenB(.init(message:textInput)))
+                    router.push(to: .screenB(.init(
+                        message: textInput,
+                        onComplete: { newMessage in
+                            textInput = newMessage
+                        }
+                    )))
                 }
-            }
-            .buttonStyle(.borderedProminent)
+            }.buttonStyle(.borderedProminent)
         }
         .padding()
     }

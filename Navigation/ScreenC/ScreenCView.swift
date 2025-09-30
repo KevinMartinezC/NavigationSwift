@@ -10,6 +10,7 @@ import SwiftUI
 struct ScreenCView: View {
     @Environment(Router.self) private var router
     @StateObject var viewModel: ScreenCViewModel
+    let completion: (String) -> Void
     
     var body: some View {
         VStack(spacing: 20) {
@@ -22,14 +23,19 @@ struct ScreenCView: View {
             HStack {
                 Button("Back") {
                     router.pop()
+                    completion(viewModel.message)
                 }
                 
                 Button("Go to Screen D") {
-                    router.push(to: .screenD(.init(message:"hello from screen C")))
+                    router.push(to: .screenD(
+                        .init(
+                            message: viewModel.message,
+                            onComplete: { message in
+                                viewModel.message = message
+                            }
+                        )))
                 }
-            }
-            
-            .buttonStyle(.borderedProminent)
+            }.buttonStyle(.borderedProminent)
         }
         .padding()
     }

@@ -10,7 +10,7 @@ import Combine
 
 final class ScreenDViewModel: ObservableObject {
     
-    let message: String
+    @Published var message: String
     
     init (
         message: String

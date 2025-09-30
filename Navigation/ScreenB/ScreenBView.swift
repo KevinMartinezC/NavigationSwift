@@ -9,6 +9,7 @@ import SwiftUI
 struct ScreenBView: View {
     @Environment(Router.self) private var router
     @StateObject var viewModel: ScreenBViewModel
+    let completion: (String) -> Void
     
     var body: some View {
         VStack(spacing: 20) {
@@ -21,11 +22,17 @@ struct ScreenBView: View {
             HStack {
                 
                 Button("Back") {
-                    
+                    router.pop()
+                    completion(viewModel.message)
                 }
                 
                 Button("Go to Screen C") {
-                    router.push(to: .screenC(.init(message:viewModel.message)))
+                    router.push(to: .screenC(.init(
+                        message: viewModel.message,
+                        onComplete: { message in
+                            viewModel.message = message
+                        }
+                    )))
                 }
                 .buttonStyle(.borderedProminent)
                 
