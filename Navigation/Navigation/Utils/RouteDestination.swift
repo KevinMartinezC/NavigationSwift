@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol RouterDestination: Equatable, Hashable {
+protocol RouteDestination: Equatable, Hashable {
     var id: UUID { get }
 }
 
-extension RouterDestination {
+extension RouteDestination {
     static func ==(lhs: Self, rhs: Self) -> Bool {
         return lhs.id == rhs.id
     }

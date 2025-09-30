@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ScreenAView: View {
     @Environment(Router.self) private var router
-    @State private var textInput: String = ""
+    @StateObject var viewModel: ScreenAViewModel
+
     
     var body: some View {
         VStack(spacing: 20) {
@@ -17,15 +18,15 @@ struct ScreenAView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
             
-            TextFielView(text: $textInput)
+            TextFielView(text: $viewModel.message)
             
             HStack{
                 
                 Button("Go to Screen B") {
                     router.push(to: .screenB(.init(
-                        message: textInput,
+                        message: viewModel.message,
                         onComplete: { newMessage in
-                            textInput = newMessage
+                            viewModel.message = newMessage
                         }
                     )))
                 }
@@ -34,7 +35,7 @@ struct ScreenAView: View {
         .padding()
         .onAppear {
             router.rootCompletion = { data in
-                textInput = data
+                viewModel.message = data
             }
         }
     }

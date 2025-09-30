@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ScreenDRoute: RouterDestination {
+struct ScreenDRoute: RouteDestination {
     let id = UUID()
     let message: String
     let onComplete: (String) -> Void
