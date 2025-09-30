@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 final class ScreenAViewModel: ObservableObject {
-    @Publish var message: String
+    @Published var message: String
     
     init (
         message: String
