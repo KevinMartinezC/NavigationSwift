@@ -32,5 +32,10 @@ struct ScreenAView: View {
             }.buttonStyle(.borderedProminent)
         }
         .padding()
+        .onAppear {
+            router.rootCompletion = { data in
+                textInput = data
+            }
+        }
     }
 }

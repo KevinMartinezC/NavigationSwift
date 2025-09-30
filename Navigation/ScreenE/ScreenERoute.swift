@@ -12,4 +12,3 @@ struct ScreenERoute:  RouterDestination {
     let message: String
     let onComplete: (String) -> Void
 }
-

@@ -10,6 +10,7 @@ import SwiftUI
 @Observable
 final class Router {
     var path = NavigationPath()
+    var rootCompletion: ((String) -> Void)?
     
     func push(to route: AppRoute) {
         path.append(route)
@@ -20,7 +21,10 @@ final class Router {
         path.removeLast()
     }
     
-    func popToRoot() {
+    func popToRoot(with data: String? = nil) {
         path.removeLast(path.count)
+        if let data = data {
+            rootCompletion?(data)
+        }
     }
 }

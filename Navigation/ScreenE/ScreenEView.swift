@@ -29,7 +29,7 @@ struct ScreenEView: View {
                 }
                 
                 Button("Submit & Return to A") {
-                    router.popToRoot()
+                    router.popToRoot(with: viewModel.message)
                 }.disabled(viewModel.message.isEmpty)
             }.buttonStyle(.borderedProminent)
         }
