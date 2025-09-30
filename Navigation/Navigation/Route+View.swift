@@ -18,7 +18,6 @@ extension View {
             ScreenDView(viewModel: .init(message: destination.message))
         case let .screenE(destination):
             ScreenEView(viewModel: .init(message: destination.message))
-            
         }
     }
 }

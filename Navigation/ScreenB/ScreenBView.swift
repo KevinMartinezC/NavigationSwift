@@ -12,14 +12,24 @@ struct ScreenBView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Screen B" + " \(viewModel.message)")
+            Text("Screen B")
                 .font(.largeTitle)
                 .fontWeight(.bold)
             
-            Button("Go to Screen C") {
-                router.push(to: .screenC(.init(message:"Hello from B")))
+            TextFielView(text: $viewModel.message)
+            
+            HStack {
+                
+                Button("Back") {
+                    
+                }
+                
+                Button("Go to Screen C") {
+                    router.push(to: .screenC(.init(message:viewModel.message)))
+                }
+                .buttonStyle(.borderedProminent)
+                
             }
-            .buttonStyle(.borderedProminent)
         }
         .padding()
     }
