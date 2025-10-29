@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2FAAFCC42E905A1200E89A07 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 2FAAFCC32E905A1200E89A07 /* Factory */; };
+		2FAAFCC62E905A1200E89A07 /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2FAAFCC52E905A1200E89A07 /* FactoryKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		2FE6F0AB2E8B190600A09578 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +28,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FAAFCC62E905A1200E89A07 /* FactoryKit in Frameworks */,
+				2FAAFCC42E905A1200E89A07 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +72,8 @@
 			);
 			name = Navigation;
 			packageProductDependencies = (
+				2FAAFCC32E905A1200E89A07 /* Factory */,
+				2FAAFCC52E905A1200E89A07 /* FactoryKit */,
 			);
 			productName = Navigation;
 			productReference = 2FE6F0AB2E8B190600A09578 /* Navigation.app */;
@@ -94,6 +103,9 @@
 			);
 			mainGroup = 2FE6F0A22E8B190600A09578;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2FAAFCC22E905A1200E89A07 /* XCRemoteSwiftPackageReference "Factory" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2FE6F0AC2E8B190600A09578 /* Products */;
 			projectDirPath = "";
@@ -332,6 +344,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2FAAFCC22E905A1200E89A07 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2FAAFCC32E905A1200E89A07 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2FAAFCC22E905A1200E89A07 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+		2FAAFCC52E905A1200E89A07 /* FactoryKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2FAAFCC22E905A1200E89A07 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = FactoryKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2FE6F0A32E8B190600A09578 /* Project object */;
 }

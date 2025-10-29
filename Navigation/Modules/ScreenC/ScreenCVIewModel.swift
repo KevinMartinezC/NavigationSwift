@@ -7,21 +7,28 @@
 
 import Foundation
 import Combine
+import Factory
+
 
 final class ScreenCViewModel: ObservableObject {
+    private let ProductService: ProductServiceType
     
     @Published var message: String
     
     init (
-        message: String
+        message: String,
+        productService: ProductServiceType
     ) {
         self.message = message
+        self.ProductService = productService
     }
-    
 }
 
 extension ScreenCViewModel {
     static func make(message: String) -> ScreenCViewModel {
-        .init(message: message)
+        .init(
+            message: message,
+            productService: resolve(\.productService)
+        )
     }
 }

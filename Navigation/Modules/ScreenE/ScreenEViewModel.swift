@@ -18,7 +18,6 @@ final class ScreenEViewModel: ObservableObject {
     ) {
         self.message = message
     }
-    
 }
 
 extension ScreenEViewModel {

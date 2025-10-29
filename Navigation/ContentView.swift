@@ -12,7 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack(path: $router.path) {
-            ScreenAView()
+            ScreenAView(viewModel: .make())
                 .navigationDestination(for: AppRoute.self) { screen in
                     navGrap(for: screen)
                 }

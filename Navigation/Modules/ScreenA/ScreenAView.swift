@@ -11,7 +11,6 @@ struct ScreenAView: View {
     @Environment(Router.self) private var router
     @StateObject var viewModel: ScreenAViewModel
 
-    
     var body: some View {
         VStack(spacing: 20) {
             Text("Screen A")

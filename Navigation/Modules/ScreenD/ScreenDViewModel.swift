@@ -1,5 +1,5 @@
 //
-//  ScreenAViewModel.swift
+//  ScreenDViewModel.swift
 //  Navigation
 //
 //  Created by KevinMartinez on 9/29/25.
@@ -8,7 +8,8 @@
 import Foundation
 import Combine
 
-final class ScreenAViewModel: ObservableObject {
+final class ScreenDViewModel: ObservableObject {
+    
     @Published var message: String
     
     init (
@@ -16,11 +17,10 @@ final class ScreenAViewModel: ObservableObject {
     ) {
         self.message = message
     }
-    
 }
 
-extension ScreenAViewModel {
-    static func make(message: String) -> ScreenAViewModel {
+extension ScreenDViewModel {
+    static func make(message: String) -> ScreenDViewModel {
         .init(message: message)
     }
 }
