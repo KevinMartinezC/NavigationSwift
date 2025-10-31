@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CharactersView: View {
     @Environment(Router.self) private var router
-    @StateObject var viewModel: ScreenAViewModel
+    @StateObject var viewModel: CharactersViewModel
 
     var body: some View {
         ZStack {
