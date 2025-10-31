@@ -9,27 +9,27 @@ import Foundation
 import Combine
 import Factory
 
-final class ScreenBViewModel: ObservableObject {
+final class CharacterDetailViewModel: ObservableObject {
     private let productService: ProductServiceType
     private let userService: UserServiceType
     
-    @Published var message: String
+    @Published var characterId: Int
     
     init (
-        message: String,
+        characterId: Int,
         productService: ProductServiceType,
         userService: UserServiceType
     ) {
-        self.message = message
+        self.characterId = characterId
         self.productService = productService
         self.userService = userService
     }
 }
 
-extension ScreenBViewModel {
-    static func make(message: String) -> ScreenBViewModel {
+extension CharacterDetailViewModel {
+    static func make(characterId: Int) -> CharacterDetailViewModel {
         .init(
-            message: message,
+            characterId: characterId,
             productService: resolve(\.productService),
             userService: resolve(\.userService)
         )
