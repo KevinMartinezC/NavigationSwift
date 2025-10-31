@@ -34,9 +34,6 @@ struct CharactersView: View {
         }
         .onAppear {
             viewModel.getCharacters()
-            router.rootCompletion = { data in
-                viewModel.message = data
-            }
         }
         .navigationTitle("Rick and Morty")
     }

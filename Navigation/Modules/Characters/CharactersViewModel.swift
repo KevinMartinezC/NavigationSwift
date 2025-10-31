@@ -10,25 +10,22 @@ import Factory
 import Foundation
 
 final class CharactersViewModel: ObservableObject {
-    private let rickyAndMortyService: RickAndMortyServiceType
-
-    @Published var message: String
+    private let characterService: CharacterServiceType
+    
     @Published var characters: [Character] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
 
     init(
-        message: String,
-        rickyAndMortyService: RickAndMortyServiceType
+        characterService: CharacterServiceType
     ) {
-        self.message = message
-        self.rickyAndMortyService = rickyAndMortyService
+        self.characterService = characterService
     }
 
     func getCharacters() {
         isLoading = true
 
-        rickyAndMortyService.fetchCharacters(page: 1) { [weak self] result in
+        characterService.fetchCharacters(page: 1) { [weak self] result in
             DispatchQueue.main.async {
                 self?.isLoading = false
 
@@ -44,10 +41,9 @@ final class CharactersViewModel: ObservableObject {
 }
 
 extension CharactersViewModel {
-    static func make(message: String = "") -> CharactersViewModel {
+    static func make() -> CharactersViewModel {
         .init(
-            message: message,
-            rickyAndMortyService: resolve(\.rickAndMortyService),
+            characterService: resolve(\.characterService),
         )
     }
 }

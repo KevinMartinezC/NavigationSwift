@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol RickAndMortyServiceType {
+protocol CharacterServiceType {
     func fetchCharacters(
         page: Int,
         completion: @escaping (Result<CharactersResponse, Error>) -> Void
@@ -18,10 +18,10 @@ protocol RickAndMortyServiceType {
     )
 }
 
-struct RickAndMortyService: RickAndMortyServiceType {
-    private let client: APIClient
+struct CharacterService: CharacterServiceType {
+    private let client: HTTPClient
 
-    init(client: APIClient) {
+    init(client: HTTPClient) {
         self.client = client
     }
 
@@ -42,6 +42,7 @@ struct RickAndMortyService: RickAndMortyServiceType {
     ) {
         client.get(
             path: "/character/\(id)",
+            query: [:],
             completion: completion
         )
     }
