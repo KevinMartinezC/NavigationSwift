@@ -8,14 +8,40 @@ import SwiftUI
 
 struct CharacterDetailView: View {
     @StateObject var viewModel: CharacterDetailViewModel
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        VStack(spacing: 20) {
-          
+        ZStack {
+            Color(.systemGroupedBackground)
+                .ignoresSafeArea()
+            
+            content
         }
-        .padding()
+        .navigationTitle("Character Detail")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             viewModel.fetchCharacterById(id: viewModel.characterId)
         }
+    }
+    
+    @ViewBuilder
+    private var content: some View {
+        if viewModel.isLoading {
+            LoadingView()
+        } else if let error = viewModel.errorMessage {
+            ErrorView(error: error) {
+                viewModel.fetchCharacterById(id: viewModel.characterId)
+            }
+        } else if let character = viewModel.characters {
+            CharacterDetailContent(character: character)
+        } else {
+            EmptyStateView()
+        }
+    }
+}
+
+#Preview {
+    NavigationStack {
+        CharacterDetailView(viewModel: .make(characterId: 1))
     }
 }

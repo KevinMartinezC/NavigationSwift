@@ -14,6 +14,8 @@ final class CharacterDetailViewModel: ObservableObject {
 
     @Published var characterId: Int
     @Published var characters: Character? = nil
+    @Published var isLoading: Bool = false
+    @Published var errorMessage: String?
 
     init(
         characterId: Int,
@@ -24,13 +26,18 @@ final class CharacterDetailViewModel: ObservableObject {
     }
 
     func fetchCharacterById(id: Int) {
+        isLoading = true
+        errorMessage = nil
+
         rickAndMortyService.fetchCharacterById(id: id) { [weak self] result in
             DispatchQueue.main.async {
+                self?.isLoading = false
+
                 switch result {
                 case .success(let character):
                     self?.characters = character
-                case .failure:
-                    break
+                case .failure(let error):
+                    self?.errorMessage = error.localizedDescription
                 }
             }
         }
