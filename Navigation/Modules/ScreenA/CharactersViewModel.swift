@@ -9,7 +9,7 @@ import Combine
 import Factory
 import Foundation
 
-final class ScreenAViewModel: ObservableObject {
+final class CharactersViewModel: ObservableObject {
     private let rickyAndMortyService: RickAndMortyServiceType
 
     @Published var message: String
@@ -43,8 +43,8 @@ final class ScreenAViewModel: ObservableObject {
     }
 }
 
-extension ScreenAViewModel {
-    static func make(message: String = "") -> ScreenAViewModel {
+extension CharactersViewModel {
+    static func make(message: String = "") -> CharactersViewModel {
         .init(
             message: message,
             rickyAndMortyService: resolve(\.rickAndMortyService),
