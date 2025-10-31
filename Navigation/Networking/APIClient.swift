@@ -7,7 +7,21 @@
 
 import Foundation
 
-final class APIClient {
+protocol HTTPClient {
+    func get<T: Decodable>(
+        path: String,
+        query: [String: String],
+        completion: @escaping (Result<T, Error>) -> Void
+    )
+    
+    func post<T: Decodable, Body: Encodable>(
+        path: String,
+        body: Body,
+        completion: @escaping (Result<T, Error>) -> Void
+    )
+}
+
+struct APIClient: HTTPClient {
     private let baseURL: String
     private let session: URLSession
 
@@ -15,8 +29,7 @@ final class APIClient {
         self.baseURL = baseURL
         self.session = session
     }
-
-    // GET method with callback
+    
     func get<T: Decodable>(
         path: String,
         query: [String: String] = [:],
@@ -28,42 +41,13 @@ final class APIClient {
                 method: "GET",
                 query: query
             )
-
-            session.dataTask(with: request) { data, response, error in
-                // Handle error
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-
-                // Validate response
-                guard let httpResponse = response as? HTTPURLResponse,
-                    (200...299).contains(httpResponse.statusCode)
-                else {
-                    completion(.failure(NetworkError.invalidResponse))
-                    return
-                }
-
-                // Validate data
-                guard let data = data else {
-                    completion(.failure(NetworkError.noData))
-                    return
-                }
-
-                // Decode
-                do {
-                    let decoded = try JSONDecoder().decode(T.self, from: data)
-                    completion(.success(decoded))
-                } catch {
-                    completion(.failure(error))
-                }
-            }.resume()
+            
+            executeRequest(request, completion: completion)
         } catch {
             completion(.failure(error))
         }
     }
 
-    // POST method with callback
     func post<T: Decodable, Body: Encodable>(
         path: String,
         body: Body,
@@ -75,39 +59,41 @@ final class APIClient {
                 method: "POST",
                 body: body
             )
-
-            session.dataTask(with: request) { data, response, error in
-                // Handle error
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-
-                // Validate response
-                guard let httpResponse = response as? HTTPURLResponse,
-                    (200...299).contains(httpResponse.statusCode)
-                else {
-                    completion(.failure(NetworkError.invalidResponse))
-                    return
-                }
-
-                // Validate data
-                guard let data = data else {
-                    completion(.failure(NetworkError.noData))
-                    return
-                }
-
-                // Decode
-                do {
-                    let decoded = try JSONDecoder().decode(T.self, from: data)
-                    completion(.success(decoded))
-                } catch {
-                    completion(.failure(error))
-                }
-            }.resume()
+            
+            executeRequest(request, completion: completion)
         } catch {
             completion(.failure(error))
         }
+    }
+        
+    private func executeRequest<T: Decodable>(
+        _ request: URLRequest,
+        completion: @escaping (Result<T, Error>) -> Void
+    ) {
+        session.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(NetworkError.invalidResponse))
+                return
+            }
+
+            guard let data = data else {
+                completion(.failure(NetworkError.noData))
+                return
+            }
+
+            do {
+                let decoded = try JSONDecoder().decode(T.self, from: data)
+                completion(.success(decoded))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
     }
 
     private func buildRequest(
@@ -135,10 +121,7 @@ final class APIClient {
 
         if let body {
             request.httpBody = try JSONEncoder().encode(body)
-            request.setValue(
-                "application/json",
-                forHTTPHeaderField: "Content-Type"
-            )
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
 
         return request

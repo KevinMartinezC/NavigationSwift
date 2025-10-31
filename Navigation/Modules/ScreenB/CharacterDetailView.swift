@@ -14,7 +14,6 @@ struct CharacterDetailView: View {
         ZStack {
             Color(.systemGroupedBackground)
                 .ignoresSafeArea()
-            
             content
         }
         .navigationTitle("Character Detail")

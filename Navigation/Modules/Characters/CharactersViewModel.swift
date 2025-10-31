@@ -12,9 +12,9 @@ import Foundation
 final class CharactersViewModel: ObservableObject {
     private let characterService: CharacterServiceType
     
-    @Published var characters: [Character] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var characters: [Character] = []
 
     init(
         characterService: CharacterServiceType

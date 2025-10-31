@@ -10,15 +10,16 @@ import Foundation
 
 extension Container {
 
-    var apiClient: Factory<APIClient> {
-        self {
-            APIClient(baseURL: "https://rickandmortyapi.com/api")
-        }.singleton
-    }
+    var httpClient: Factory<HTTPClient> {
+          self {
+              APIClient(baseURL: "https://rickandmortyapi.com/api")
+          }
+          .singleton
+      }
 
-    var rickAndMortyService: Factory<RickAndMortyServiceType> {
+    var characterService: Factory<CharacterServiceType> {
         self {
-            RickAndMortyService(client: self.apiClient())
+            CharacterService(client: self.httpClient())
         }
         .unique
     }
