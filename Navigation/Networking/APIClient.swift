@@ -16,36 +16,98 @@ final class APIClient {
         self.session = session
     }
 
-    //Get method
-    func get<T: Decodable>(_ path: String, query: [String: String] = [:])
-        async throws -> T
-    {
-        let request = try buildRequest(path: path, method: "GET", query: query)
-        let (data, response) = try await session.data(for: request)
+    // GET method with callback
+    func get<T: Decodable>(
+        path: String,
+        query: [String: String] = [:],
+        completion: @escaping (Result<T, Error>) -> Void
+    ) {
+        do {
+            let request = try buildRequest(
+                path: path,
+                method: "GET",
+                query: query
+            )
 
-        guard let httpResponse = response as? HTTPURLResponse,
-            (200...299).contains(httpResponse.statusCode)
-        else {
-            throw NetworkError.invalidResponse
+            session.dataTask(with: request) { data, response, error in
+                // Handle error
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+
+                // Validate response
+                guard let httpResponse = response as? HTTPURLResponse,
+                    (200...299).contains(httpResponse.statusCode)
+                else {
+                    completion(.failure(NetworkError.invalidResponse))
+                    return
+                }
+
+                // Validate data
+                guard let data = data else {
+                    completion(.failure(NetworkError.noData))
+                    return
+                }
+
+                // Decode
+                do {
+                    let decoded = try JSONDecoder().decode(T.self, from: data)
+                    completion(.success(decoded))
+                } catch {
+                    completion(.failure(error))
+                }
+            }.resume()
+        } catch {
+            completion(.failure(error))
         }
-
-        return try JSONDecoder().decode(T.self, from: data)
     }
 
-    //Post method
-    func post<T: Decodable, Body: Encodable>(_ path: String, body: Body)
-        async throws -> T
-    {
-        let request = try buildRequest(path: path, method: "POST", body: body)
-        let (data, response) = try await session.data(for: request)
+    // POST method with callback
+    func post<T: Decodable, Body: Encodable>(
+        path: String,
+        body: Body,
+        completion: @escaping (Result<T, Error>) -> Void
+    ) {
+        do {
+            let request = try buildRequest(
+                path: path,
+                method: "POST",
+                body: body
+            )
 
-        guard let httpResponse = response as? HTTPURLResponse,
-            (200...299).contains(httpResponse.statusCode)
-        else {
-            throw NetworkError.invalidResponse
+            session.dataTask(with: request) { data, response, error in
+                // Handle error
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+
+                // Validate response
+                guard let httpResponse = response as? HTTPURLResponse,
+                    (200...299).contains(httpResponse.statusCode)
+                else {
+                    completion(.failure(NetworkError.invalidResponse))
+                    return
+                }
+
+                // Validate data
+                guard let data = data else {
+                    completion(.failure(NetworkError.noData))
+                    return
+                }
+
+                // Decode
+                do {
+                    let decoded = try JSONDecoder().decode(T.self, from: data)
+                    completion(.success(decoded))
+                } catch {
+                    completion(.failure(error))
+                }
+            }.resume()
+        } catch {
+            completion(.failure(error))
         }
-
-        return try JSONDecoder().decode(T.self, from: data)
     }
 
     private func buildRequest(
@@ -80,19 +142,5 @@ final class APIClient {
         }
 
         return request
-    }
-}
-
-enum NetworkError: LocalizedError {
-    case invalidURL
-    case invalidResponse
-    case noData
-
-    var errorDescription: String? {
-        switch self {
-        case .invalidURL: "Invalid URL"
-        case .invalidResponse: "Invalid response from server"
-        case .noData: "No data received"
-        }
     }
 }

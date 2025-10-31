@@ -1,3 +1,10 @@
+//
+//  NetworkError.swift
+//  Navigation
+//
+//  Created by KevinMartinez on 10/30/25.
+//
+
 import Foundation
 
 enum NetworkError: LocalizedError {

@@ -16,6 +16,13 @@ extension Container {
         }.singleton
     }
 
+    var rickAndMortyService: Factory<RickAndMortyServiceType> {
+        self {
+            RickAndMortyService(client: self.apiClient())
+        }
+        .unique
+    }
+
     var authService: Factory<AuthServiceType> {
         self {
             AuthService()

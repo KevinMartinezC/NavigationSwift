@@ -33,6 +33,7 @@ struct ScreenAView: View {
         }
         .padding()
         .onAppear {
+            viewModel.getCharacters()
             router.rootCompletion = { data in
                 viewModel.message = data
             }

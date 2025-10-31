@@ -5,21 +5,41 @@
 //  Created by KevinMartinez on 9/29/25.
 //
 
-import Foundation
-import Factory
 import Combine
+import Factory
+import Foundation
 
 final class ScreenAViewModel: ObservableObject {
-    private let authService: AuthServiceType
-    
-    @Published var message: String
+    private let rickyAndMortyService: RickAndMortyServiceType
 
-    init (
+    @Published var message: String
+    @Published var characters: [Character] = []
+    @Published var isLoading = false
+    @Published var errorMessage: String?
+
+    init(
         message: String,
-        authService: AuthServiceType
+        rickyAndMortyService: RickAndMortyServiceType
     ) {
         self.message = message
-        self.authService = authService
+        self.rickyAndMortyService = rickyAndMortyService
+    }
+
+    func getCharacters() {
+        isLoading = true
+
+        rickyAndMortyService.fetchCharacters(page: 1) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isLoading = false
+
+                switch result {
+                case .success(let response):
+                    self?.characters = response.results
+                case .failure(let error):
+                    self?.errorMessage = error.localizedDescription
+                }
+            }
+        }
     }
 }
 
@@ -27,7 +47,7 @@ extension ScreenAViewModel {
     static func make(message: String = "") -> ScreenAViewModel {
         .init(
             message: message,
-            authService: resolve(\.authService)
+            rickyAndMortyService: resolve(\.rickAndMortyService),
         )
     }
 }
