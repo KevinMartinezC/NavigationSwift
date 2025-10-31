@@ -10,22 +10,21 @@ extension View {
     @ViewBuilder
     func navGrap(for route: AppRoute) -> some View {
         switch route {
-        case let .screenB(destination):
-            ScreenBView(
-                viewModel: .make(message: destination.message),
-                completion:destination.onComplete
+        case .characterDetail(let destination):
+            CharacterDetailView(
+                viewModel: .make(characterId: destination.characterId),
             )
-        case let .screenC(destination):
+        case .screenC(let destination):
             ScreenCView(
                 viewModel: .make(message: destination.message),
                 completion: destination.onComplete
             )
-        case let .screenD(destination):
+        case .screenD(let destination):
             ScreenDView(
                 viewModel: .make(message: destination.message),
                 completion: destination.onComplete
             )
-        case let .screenE(destination):
+        case .screenE(let destination):
             ScreenEView(
                 viewModel: .make(message: destination.message),
                 completion: destination.onComplete

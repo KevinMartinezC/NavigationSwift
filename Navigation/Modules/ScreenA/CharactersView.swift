@@ -15,10 +15,19 @@ struct CharactersView: View {
         ZStack {
             if viewModel.isLoading {
                 ProgressView("Loading character...")
-            }else {
+            } else {
                 List(viewModel.characters) { character in
-                    CharacterItemView(character: character)
-                        .listRowSeparator(.hidden)
+                    CharacterItemView(
+                        character: character,
+                        action: {
+                            router.push(
+                                to: .characterDetail(
+                                    .init(characterId: character.id)
+                                )
+                            )
+                        }
+                    )
+                    .listRowSeparator(.hidden)
                 }
                 .listStyle(.plain)
             }
@@ -32,6 +41,3 @@ struct CharactersView: View {
         .navigationTitle("Rick and Morty")
     }
 }
-
-
-

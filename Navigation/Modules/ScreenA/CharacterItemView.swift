@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CharacterItemView: View {
     let character: Character
-    
+    let action: () -> Void
+
     var body: some View {
         HStack(spacing: 16) {
             // Character Image
@@ -41,28 +42,28 @@ struct CharacterItemView: View {
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(Color.gray.opacity(0.2), lineWidth: 1)
             )
-            
+
             // Character Info
             VStack(alignment: .leading, spacing: 6) {
                 Text(character.name)
                     .font(.headline)
                     .lineLimit(2)
-                
+
                 HStack(spacing: 6) {
                     Circle()
                         .fill(statusColor)
                         .frame(width: 10, height: 10)
-                    
+
                     Text(character.status)
                         .font(.subheadline)
                         .fontWeight(.medium)
                         .foregroundStyle(statusColor)
                 }
-                
+
                 Text(character.species)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
-                
+
                 if let type = character.type, !type.isEmpty {
                     Text(type)
                         .font(.caption)
@@ -70,15 +71,18 @@ struct CharacterItemView: View {
                         .lineLimit(1)
                 }
             }
-            
+
             Spacer(minLength: 0)
         }
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(16)
         .shadow(color: Color.black.opacity(0.08), radius: 5, x: 0, y: 2)
+        .onTapGesture {
+            action()
+        }
     }
-    
+
     private var statusColor: Color {
         switch character.status.lowercased() {
         case "alive": .green
@@ -88,12 +92,14 @@ struct CharacterItemView: View {
     }
 }
 
-
 #Preview("Card Style") {
     ScrollView {
         VStack(spacing: 12) {
             ForEach(Character.previewList) { character in
-                CharacterItemView(character: character)
+                CharacterItemView(
+                    character: character,
+                    action: {}
+                )
             }
         }
         .padding()
@@ -110,18 +116,24 @@ extension Character {
             species: "Human",
             type: nil,
             gender: "Male",
-            origin: Location(name: "Earth (C-137)", url: "https://rickandmortyapi.com/api/location/1"),
-            location: Location(name: "Citadel of Ricks", url: "https://rickandmortyapi.com/api/location/3"),
+            origin: Location(
+                name: "Earth (C-137)",
+                url: "https://rickandmortyapi.com/api/location/1"
+            ),
+            location: Location(
+                name: "Citadel of Ricks",
+                url: "https://rickandmortyapi.com/api/location/3"
+            ),
             image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
             episode: [
                 "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/2"
+                "https://rickandmortyapi.com/api/episode/2",
             ],
             url: "https://rickandmortyapi.com/api/character/1",
             created: "2017-11-04T18:48:46.250Z"
         )
     }
-    
+
     static var previewList: [Character] {
         [
             Character(
@@ -133,7 +145,8 @@ extension Character {
                 gender: "Male",
                 origin: Location(name: "Earth (C-137)", url: ""),
                 location: Location(name: "Citadel of Ricks", url: ""),
-                image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+                image:
+                    "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
                 episode: [],
                 url: "",
                 created: ""
@@ -146,8 +159,12 @@ extension Character {
                 type: nil,
                 gender: "Male",
                 origin: Location(name: "Earth (C-137)", url: ""),
-                location: Location(name: "Earth (Replacement Dimension)", url: ""),
-                image: "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
+                location: Location(
+                    name: "Earth (Replacement Dimension)",
+                    url: ""
+                ),
+                image:
+                    "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
                 episode: [],
                 url: "",
                 created: ""
@@ -159,9 +176,16 @@ extension Character {
                 species: "Human",
                 type: nil,
                 gender: "Female",
-                origin: Location(name: "Earth (Replacement Dimension)", url: ""),
-                location: Location(name: "Earth (Replacement Dimension)", url: ""),
-                image: "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
+                origin: Location(
+                    name: "Earth (Replacement Dimension)",
+                    url: ""
+                ),
+                location: Location(
+                    name: "Earth (Replacement Dimension)",
+                    url: ""
+                ),
+                image:
+                    "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
                 episode: [],
                 url: "",
                 created: ""
@@ -173,9 +197,13 @@ extension Character {
                 species: "Human",
                 type: "Genetic experiment",
                 gender: "Male",
-                origin: Location(name: "Earth (Replacement Dimension)", url: ""),
+                origin: Location(
+                    name: "Earth (Replacement Dimension)",
+                    url: ""
+                ),
                 location: Location(name: "Testicle Monster Dimension", url: ""),
-                image: "https://rickandmortyapi.com/api/character/avatar/7.jpeg",
+                image:
+                    "https://rickandmortyapi.com/api/character/avatar/7.jpeg",
                 episode: [],
                 url: "",
                 created: ""
@@ -189,11 +217,12 @@ extension Character {
                 gender: "Female",
                 origin: Location(name: "Abadango", url: ""),
                 location: Location(name: "Abadango", url: ""),
-                image: "https://rickandmortyapi.com/api/character/avatar/6.jpeg",
+                image:
+                    "https://rickandmortyapi.com/api/character/avatar/6.jpeg",
                 episode: [],
                 url: "",
                 created: ""
-            )
+            ),
         ]
     }
 }

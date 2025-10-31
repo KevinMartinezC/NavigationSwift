@@ -12,6 +12,10 @@ protocol RickAndMortyServiceType {
         page: Int,
         completion: @escaping (Result<CharactersResponse, Error>) -> Void
     )
+    func fetchCharacterById(
+        id: Int,
+        completion: @escaping (Result<Character, Error>) -> Void
+    )
 }
 
 struct RickAndMortyService: RickAndMortyServiceType {
@@ -28,6 +32,16 @@ struct RickAndMortyService: RickAndMortyServiceType {
         client.get(
             path: "/character",
             query: ["page": "\(page)"],
+            completion: completion
+        )
+    }
+
+    func fetchCharacterById(
+        id: Int,
+        completion: @escaping (Result<Character, Error>) -> Void
+    ) {
+        client.get(
+            path: "/character/\(id)",
             completion: completion
         )
     }

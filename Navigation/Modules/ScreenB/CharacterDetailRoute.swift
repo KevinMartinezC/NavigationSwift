@@ -9,6 +9,5 @@ import Foundation
 
 struct CharacterDetailRoute: RouteDestination {
     let id = UUID()
-    let message: String
-    let onComplete: (String) -> Void
+    let characterId: Int
 }

@@ -5,24 +5,35 @@
 //  Created by KevinMartinez on 9/29/25.
 //
 
-import Foundation
 import Combine
 import Factory
+import Foundation
 
 final class CharacterDetailViewModel: ObservableObject {
-    private let productService: ProductServiceType
-    private let userService: UserServiceType
-    
+    private let rickAndMortyService: RickAndMortyServiceType
+
     @Published var characterId: Int
-    
-    init (
+    @Published var characters: Character? = nil
+
+    init(
         characterId: Int,
-        productService: ProductServiceType,
-        userService: UserServiceType
+        rickAndMortyService: RickAndMortyServiceType
     ) {
         self.characterId = characterId
-        self.productService = productService
-        self.userService = userService
+        self.rickAndMortyService = rickAndMortyService
+    }
+
+    func fetchCharacterById(id: Int) {
+        rickAndMortyService.fetchCharacterById(id: id) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let character):
+                    self?.characters = character
+                case .failure:
+                    break
+                }
+            }
+        }
     }
 }
 
@@ -30,8 +41,7 @@ extension CharacterDetailViewModel {
     static func make(characterId: Int) -> CharacterDetailViewModel {
         .init(
             characterId: characterId,
-            productService: resolve(\.productService),
-            userService: resolve(\.userService)
+            rickAndMortyService: resolve(\.rickAndMortyService)
         )
     }
 }
