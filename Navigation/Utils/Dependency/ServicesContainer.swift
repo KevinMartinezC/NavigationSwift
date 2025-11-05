@@ -12,7 +12,7 @@ extension Container {
 
     var httpClient: Factory<HTTPClient> {
           self {
-              APIClient(baseURL: "https://rickandmortyapi.com/api")
+              MoyaClient(baseURL: "https://rickandmortyapi.com/api")
           }
           .singleton
       }
