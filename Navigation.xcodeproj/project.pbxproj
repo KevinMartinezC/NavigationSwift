@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F2823EA2EBBC80D0014F65A /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 2F2823E92EBBC80D0014F65A /* Moya */; };
 		2FAAFCC42E905A1200E89A07 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 2FAAFCC32E905A1200E89A07 /* Factory */; };
 		2FAAFCC62E905A1200E89A07 /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2FAAFCC52E905A1200E89A07 /* FactoryKit */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 			files = (
 				2FAAFCC62E905A1200E89A07 /* FactoryKit in Frameworks */,
 				2FAAFCC42E905A1200E89A07 /* Factory in Frameworks */,
+				2F2823EA2EBBC80D0014F65A /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +76,7 @@
 			packageProductDependencies = (
 				2FAAFCC32E905A1200E89A07 /* Factory */,
 				2FAAFCC52E905A1200E89A07 /* FactoryKit */,
+				2F2823E92EBBC80D0014F65A /* Moya */,
 			);
 			productName = Navigation;
 			productReference = 2FE6F0AB2E8B190600A09578 /* Navigation.app */;
@@ -105,6 +108,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				2FAAFCC22E905A1200E89A07 /* XCRemoteSwiftPackageReference "Factory" */,
+				2F2823E82EBBC80D0014F65A /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2FE6F0AC2E8B190600A09578 /* Products */;
@@ -346,6 +350,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2F2823E82EBBC80D0014F65A /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
 		2FAAFCC22E905A1200E89A07 /* XCRemoteSwiftPackageReference "Factory" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Factory";
@@ -357,6 +369,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2F2823E92EBBC80D0014F65A /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F2823E82EBBC80D0014F65A /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
 		2FAAFCC32E905A1200E89A07 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2FAAFCC22E905A1200E89A07 /* XCRemoteSwiftPackageReference "Factory" */;
