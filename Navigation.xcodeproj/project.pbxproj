@@ -13,6 +13,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F62492A2EBED7BA004E7582 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
+		2F62492B2EBED83D004E7582 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Networking; sourceTree = "<group>"; };
+		2F62492C2EBED87F004E7582 /* UIComponents */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UIComponents; sourceTree = "<group>"; };
 		2FE6F0AB2E8B190600A09578 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -41,6 +44,9 @@
 		2FE6F0A22E8B190600A09578 = {
 			isa = PBXGroup;
 			children = (
+				2F62492C2EBED87F004E7582 /* UIComponents */,
+				2F62492B2EBED83D004E7582 /* Networking */,
+				2F62492A2EBED7BA004E7582 /* Core */,
 				2FE6F0AD2E8B190600A09578 /* Navigation */,
 				2FE6F0AC2E8B190600A09578 /* Products */,
 			);
