@@ -1,31 +1,18 @@
 //
-//  RickAndMortyService.swift
-//  Navigation
+//  CharacterService.swift
+//  Core
 //
-//  Created by KevinMartinez on 10/30/25.
+//  Created by KevinMartinez on 11/7/25.
 //
 
-import Foundation
-
-protocol CharacterServiceType {
-    func fetchCharacters(
-        page: Int,
-        completion: @escaping (Result<CharactersResponse, Error>) -> Void
-    )
-    func fetchCharacterById(
-        id: Int,
-        completion: @escaping (Result<Character, Error>) -> Void
-    )
-}
-
-struct CharacterService: CharacterServiceType {
+public struct CharacterService: CharacterServiceType {
     private let client: HTTPClient
 
-    init(client: HTTPClient) {
+    public init(client: HTTPClient) {
         self.client = client
     }
 
-    func fetchCharacters(
+    public func fetchCharacters(
         page: Int = 1,
         completion: @escaping (Result<CharactersResponse, Error>) -> Void
     ) {
@@ -36,7 +23,7 @@ struct CharacterService: CharacterServiceType {
         )
     }
 
-    func fetchCharacterById(
+    public func fetchCharacterById(
         id: Int,
         completion: @escaping (Result<Character, Error>) -> Void
     ) {

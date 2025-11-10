@@ -7,6 +7,8 @@
 
 import Factory
 import Foundation
+import Networking
+import Core
 
 extension Container {
 
@@ -20,27 +22,6 @@ extension Container {
     var characterService: Factory<CharacterServiceType> {
         self {
             CharacterService(client: self.httpClient())
-        }
-        .unique
-    }
-
-    var authService: Factory<AuthServiceType> {
-        self {
-            AuthService()
-        }
-        .singleton
-    }
-
-    var productService: Factory<ProductServiceType> {
-        self {
-            ProductService()
-        }
-        .unique
-    }
-
-    var userService: Factory<UserServiceType> {
-        self {
-            UserService()
         }
         .unique
     }

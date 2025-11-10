@@ -14,21 +14,6 @@ extension View {
             CharacterDetailView(
                 viewModel: .make(characterId: destination.characterId),
             )
-        case .screenC(let destination):
-            ScreenCView(
-                viewModel: .make(message: destination.message),
-                completion: destination.onComplete
-            )
-        case .screenD(let destination):
-            ScreenDView(
-                viewModel: .make(message: destination.message),
-                completion: destination.onComplete
-            )
-        case .screenE(let destination):
-            ScreenEView(
-                viewModel: .make(message: destination.message),
-                completion: destination.onComplete
-            )
         }
     }
 }

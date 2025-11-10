@@ -1,8 +1,8 @@
 //
 //  NetworkError.swift
-//  Navigation
+//  Networking
 //
-//  Created by KevinMartinez on 10/30/25.
+//  Created by KevinMartinez on 11/9/25.
 //
 
 import Foundation

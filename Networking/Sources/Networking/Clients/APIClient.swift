@@ -1,25 +1,12 @@
 //
 //  APIClient.swift
-//  Navigation
+//  Networking
 //
-//  Created by KevinMartinez on 10/30/25.
+//  Created by KevinMartinez on 11/9/25.
 //
 
+import Core
 import Foundation
-
-protocol HTTPClient {
-    func get<T: Decodable>(
-        path: String,
-        query: [String: String],
-        completion: @escaping (Result<T, Error>) -> Void
-    )
-    
-    func post<T: Decodable, Body: Encodable>(
-        path: String,
-        body: Body,
-        completion: @escaping (Result<T, Error>) -> Void
-    )
-}
 
 struct APIClient: HTTPClient {
     private let baseURL: String
@@ -29,7 +16,7 @@ struct APIClient: HTTPClient {
         self.baseURL = baseURL
         self.session = session
     }
-    
+
     func get<T: Decodable>(
         path: String,
         query: [String: String] = [:],
@@ -41,7 +28,7 @@ struct APIClient: HTTPClient {
                 method: "GET",
                 query: query
             )
-            
+
             executeRequest(request, completion: completion)
         } catch {
             completion(.failure(error))
@@ -59,13 +46,13 @@ struct APIClient: HTTPClient {
                 method: "POST",
                 body: body
             )
-            
+
             executeRequest(request, completion: completion)
         } catch {
             completion(.failure(error))
         }
     }
-        
+
     private func executeRequest<T: Decodable>(
         _ request: URLRequest,
         completion: @escaping (Result<T, Error>) -> Void
@@ -77,7 +64,8 @@ struct APIClient: HTTPClient {
             }
 
             guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
+                (200...299).contains(httpResponse.statusCode)
+            else {
                 completion(.failure(NetworkError.invalidResponse))
                 return
             }
@@ -121,7 +109,10 @@ struct APIClient: HTTPClient {
 
         if let body {
             request.httpBody = try JSONEncoder().encode(body)
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue(
+                "application/json",
+                forHTTPHeaderField: "Content-Type"
+            )
         }
 
         return request

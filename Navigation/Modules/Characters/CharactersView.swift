@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Core
 
 struct CharactersView: View {
     @Environment(Router.self) private var router

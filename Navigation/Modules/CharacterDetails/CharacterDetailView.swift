@@ -5,6 +5,7 @@
 //  Created by KevinMartinez on 9/29/25.
 //
 import SwiftUI
+import UIComponents
 
 struct CharacterDetailView: View {
     @StateObject var viewModel: CharacterDetailViewModel

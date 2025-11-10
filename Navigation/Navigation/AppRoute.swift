@@ -8,7 +8,4 @@ import Foundation
 
 enum AppRoute: Hashable {
     case characterDetail(CharacterDetailRoute)
-    case screenC(ScreenCRoute)
-    case screenD(ScreenDRoute)
-    case screenE(ScreenERoute)
 }

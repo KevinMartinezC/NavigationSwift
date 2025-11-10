@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Core
+import UIComponents
 
 struct CharacterInfoSection: View {
     let character: Character

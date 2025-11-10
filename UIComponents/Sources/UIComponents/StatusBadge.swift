@@ -1,16 +1,20 @@
 //
 //  CharacterStatusBadge.swift
-//  Navigation
+//  UIComponents
 //
-//  Created by KevinMartinez on 10/31/25.
+//  Created by KevinMartinez on 11/10/25.
 //
 
 import SwiftUI
 
-struct CharacterStatusBadge: View {
-    let status: String
+public struct StatusBadge: View {
+    public let status: String
 
-    var body: some View {
+    public init(status: String) {
+        self.status = status
+    }
+
+    public var body: some View {
         HStack(spacing: 8) {
             Circle()
                 .fill(statusColor)
@@ -38,9 +42,9 @@ struct CharacterStatusBadge: View {
 
 #Preview {
     VStack(spacing: 16) {
-        CharacterStatusBadge(status: "Alive")
-        CharacterStatusBadge(status: "Dead")
-        CharacterStatusBadge(status: "unknown")
+        StatusBadge(status: "Alive")
+        StatusBadge(status: "Dead")
+        StatusBadge(status: "unknown")
     }
     .padding()
 }

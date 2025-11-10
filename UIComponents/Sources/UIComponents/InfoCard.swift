@@ -1,22 +1,22 @@
 //
 //  InfoCard.swift
-//  Navigation
+//  UIComponents
 //
-//  Created by KevinMartinez on 10/31/25.
+//  Created by KevinMartinez on 11/10/25.
 //
 
 import SwiftUI
 
-struct InfoCard<Content: View>: View {
-    let title: String
-    let content: Content
+public struct InfoCard<Content: View>: View {
+    public let title: String
+    public let content: Content
 
-    init(title: String, @ViewBuilder content: () -> Content) {
+    public init(title: String, @ViewBuilder content: () -> Content) {
         self.title = title
         self.content = content()
     }
 
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text(title)
                 .font(.headline)

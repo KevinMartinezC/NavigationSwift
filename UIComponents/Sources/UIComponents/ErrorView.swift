@@ -1,17 +1,22 @@
 //
 //  ErrorView.swift
-//  Navigation
+//  UIComponents
 //
-//  Created by KevinMartinez on 10/31/25.
+//  Created by KevinMartinez on 11/10/25.
 //
 
 import SwiftUI
 
-struct ErrorView: View {
-    let error: String
-    let retryAction: () -> Void
+public struct ErrorView: View {
+    public let error: String
+    public let retryAction: () -> Void
 
-    var body: some View {
+    public init(error: String, retryAction: @escaping () -> Void) {
+        self.error = error
+        self.retryAction = retryAction
+    }
+
+    public var body: some View {
         ContentUnavailableView {
             Label("Error", systemImage: "exclamationmark.triangle")
         } description: {

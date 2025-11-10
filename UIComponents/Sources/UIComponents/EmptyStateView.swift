@@ -1,14 +1,17 @@
 //
 //  EmptyStateView.swift
-//  Navigation
+//  UIComponents
 //
-//  Created by KevinMartinez on 10/31/25.
+//  Created by KevinMartinez on 11/10/25.
 //
 
 import SwiftUI
 
-struct EmptyStateView: View {
-    var body: some View {
+public struct EmptyStateView: View {
+
+    public init() {}
+
+    public var body: some View {
         ContentUnavailableView(
             "Character Not Found",
             systemImage: "person.slash",

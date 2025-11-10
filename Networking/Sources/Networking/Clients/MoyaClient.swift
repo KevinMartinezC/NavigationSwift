@@ -1,20 +1,21 @@
 //
 //  MoyaClient.swift
-//  Navigation
+//  Networking
 //
-//  Created by KevinMartinez on 11/5/25.
+//  Created by KevinMartinez on 11/7/25.
 //
 
 import Alamofire
 import Foundation
 import Moya
+import Core
 
-struct MoyaClient: HTTPClient {
+public struct MoyaClient: HTTPClient {
     private let baseURL: String
     private let provider: MoyaProvider<MultiTarget>
     private let decoder: JSONDecoder
 
-    init(
+    public init(
         baseURL: String,
         plugins: [PluginType] = [],
         decoder: JSONDecoder = JSONDecoder()
@@ -35,7 +36,7 @@ struct MoyaClient: HTTPClient {
         )
     }
 
-    func get<T: Decodable>(
+    public func get<T: Decodable>(
         path: String,
         query: [String: String],
         completion: @escaping (Result<T, Error>) -> Void
@@ -58,7 +59,7 @@ struct MoyaClient: HTTPClient {
         executeRequest(target: target, completion: completion)
     }
 
-    func post<T: Decodable, Body: Encodable>(
+   public func post<T: Decodable, Body: Encodable>(
         path: String,
         body: Body,
         completion: @escaping (Result<T, Error>) -> Void

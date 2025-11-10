@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import UIComponents
+import Core
+
 
 struct CharacterDetailContent: View {
     let character: Character
@@ -14,7 +17,7 @@ struct CharacterDetailContent: View {
         ScrollView {
             VStack(spacing: 24) {
                 // Character Image
-                CharacterImageView(
+                StatusAvatarView(
                     imageURL: character.image,
                     status: character.status
                 )
@@ -26,7 +29,7 @@ struct CharacterDetailContent: View {
                     .padding(.horizontal)
                 
                 // Status Badge
-                CharacterStatusBadge(status: character.status)
+                StatusBadge(status: character.status)
                 
                 // Info Section
                 CharacterInfoSection(character: character)

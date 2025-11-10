@@ -8,6 +8,7 @@
 import Combine
 import Factory
 import Foundation
+import Core
 
 final class CharacterDetailViewModel: ObservableObject {
     private let characterService: CharacterServiceType

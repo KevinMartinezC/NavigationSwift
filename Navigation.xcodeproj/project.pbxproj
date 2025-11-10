@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F2823EA2EBBC80D0014F65A /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 2F2823E92EBBC80D0014F65A /* Moya */; };
+		2F9466212EC22FF200E86277 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9466202EC22FF200E86277 /* Networking */; };
+		2F9466232EC22FF600E86277 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9466222EC22FF600E86277 /* Core */; };
+		2F9466272EC24D4100E86277 /* UIComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9466262EC24D4100E86277 /* UIComponents */; };
 		2FAAFCC42E905A1200E89A07 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 2FAAFCC32E905A1200E89A07 /* Factory */; };
 		2FAAFCC62E905A1200E89A07 /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2FAAFCC52E905A1200E89A07 /* FactoryKit */; };
 /* End PBXBuildFile section */
@@ -34,13 +36,22 @@
 			files = (
 				2FAAFCC62E905A1200E89A07 /* FactoryKit in Frameworks */,
 				2FAAFCC42E905A1200E89A07 /* Factory in Frameworks */,
-				2F2823EA2EBBC80D0014F65A /* Moya in Frameworks */,
+				2F9466212EC22FF200E86277 /* Networking in Frameworks */,
+				2F9466232EC22FF600E86277 /* Core in Frameworks */,
+				2F9466272EC24D4100E86277 /* UIComponents in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F94661F2EC22FF200E86277 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2FE6F0A22E8B190600A09578 = {
 			isa = PBXGroup;
 			children = (
@@ -48,6 +59,7 @@
 				2F62492B2EBED83D004E7582 /* Networking */,
 				2F62492A2EBED7BA004E7582 /* Core */,
 				2FE6F0AD2E8B190600A09578 /* Navigation */,
+				2F94661F2EC22FF200E86277 /* Frameworks */,
 				2FE6F0AC2E8B190600A09578 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -82,7 +94,9 @@
 			packageProductDependencies = (
 				2FAAFCC32E905A1200E89A07 /* Factory */,
 				2FAAFCC52E905A1200E89A07 /* FactoryKit */,
-				2F2823E92EBBC80D0014F65A /* Moya */,
+				2F9466202EC22FF200E86277 /* Networking */,
+				2F9466222EC22FF600E86277 /* Core */,
+				2F9466262EC24D4100E86277 /* UIComponents */,
 			);
 			productName = Navigation;
 			productReference = 2FE6F0AB2E8B190600A09578 /* Navigation.app */;
@@ -114,7 +128,6 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				2FAAFCC22E905A1200E89A07 /* XCRemoteSwiftPackageReference "Factory" */,
-				2F2823E82EBBC80D0014F65A /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2FE6F0AC2E8B190600A09578 /* Products */;
@@ -356,14 +369,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2F2823E82EBBC80D0014F65A /* XCRemoteSwiftPackageReference "Moya" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Moya/Moya";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 15.0.3;
-			};
-		};
 		2FAAFCC22E905A1200E89A07 /* XCRemoteSwiftPackageReference "Factory" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Factory";
@@ -375,10 +380,17 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2F2823E92EBBC80D0014F65A /* Moya */ = {
+		2F9466202EC22FF200E86277 /* Networking */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2F2823E82EBBC80D0014F65A /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = Moya;
+			productName = Networking;
+		};
+		2F9466222EC22FF600E86277 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
+		2F9466262EC24D4100E86277 /* UIComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UIComponents;
 		};
 		2FAAFCC32E905A1200E89A07 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
